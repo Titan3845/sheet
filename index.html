@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Shared Sheet</title>
+</head>
+
+<body>
+
+<h2>Shared Spreadsheet</h2>
+
+<table id="data"></table>
+
+<script>
+fetch('sheet.csv')
+.then(response => response.text())
+.then(data => {
+let rows = data.split("\n").map(r => r.split(","));
+let table = document.getElementById("data");
+
+rows.forEach(row => {
+let tr = document.createElement("tr");
+
+row.forEach(cell => {
+let td = document.createElement("td");
+td.textContent = cell;
+td.style.border = "1px solid black";
+td.style.padding = "6px";
+tr.appendChild(td);
+});
+
+table.appendChild(tr);
+});
+});
+</script>
+
+</body>
+</html>
